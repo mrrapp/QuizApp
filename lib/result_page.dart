@@ -17,7 +17,7 @@ class ResultPage extends StatelessWidget {
           'question_index': i,
           'questions': questions[i].question,
           'correct_answer': questions[i].answer[0],
-          'user_answer':chosenAnswers[i],
+          'user_answer': chosenAnswers[i],
         },
       );
     }
@@ -26,27 +26,37 @@ class ResultPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final summaryData = getSummaryData();
+    final numTotalQuestions = questions.length;
+    final numCorrectAnswers = summaryData
+        .where((data) => data['correct_answer'] == data['user_answer'])
+        .length;
     return Center(
       child: Container(
         margin: const EdgeInsets.all(24),
-        child: Column(children: [
+        child: Column(mainAxisSize: MainAxisSize.min, children: [
           // number of correct answers
           Text(
-            'Total Correct answers',
+            'You got $numCorrectAnswers of $numTotalQuestions questions correctly',
+            textAlign: TextAlign.center,
             style: GoogleFonts.lato(
               fontSize: 32,
+              color: whiteColor,
+              fontWeight: FontWeight.bold,
             ),
           ),
 
           // list of answers
-         QuestionSummary(summaryData: getSummaryData()),
+          QuestionSummary(
+            summaryData: summaryData,
+          ),
 
           //Restart Button
           TextButton(
             onPressed: () {},
             style: TextButton.styleFrom(
               foregroundColor: whiteColor,
-              textStyle: TextStyle(
+              textStyle: GoogleFonts.inter(
                 color: whiteColor,
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
