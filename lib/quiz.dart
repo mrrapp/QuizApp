@@ -34,27 +34,27 @@ class _QuizState extends State<Quiz> {
       // I initially didn't use setstate, so I was not redirected to the next page
       setState(
         () {
-          selectedAnswers = [];
-          //  selectedAnswers =[]; // This clears the list in memory but is not working
-          activeScreen = 'splash_screen'; // The page is now switched
-          print('The length of list is ${selectedAnswers.length}');
+         selectedAnswers = [];
+          activeScreen = 'splash_screen'; 
+          
         },
       );
     }
   }
 
   @override
-  Widget build(BuildContext context) {
-    Widget screenWidget = SplashScreen(
-        switchScreen); //inittially forgot this passed wchich caused error after aswering all questions
+  Widget build(context) {
+    Widget screenWidget = SplashScreen(switchScreen);
+    //Widget screenWidget = SplashScreen( switchScreen); //inittially forgot this passed wchich caused error after aswering all questions
 
     if (activeScreen == 'question_screen') {
-      screenWidget = QuestionsPage(onSelectAnswer: chooseAnswer);
+      screenWidget = QuestionsPage(
+        onSelectAnswer: chooseAnswer);
     }
-// Navigating to result page
-    // if (activeScreen == 'result_screen') {
-    //   screenWidget = ResultPage();
-    // }
+
+    if (activeScreen == 'result_screen') {
+      screenWidget = ResultPage(chosenAnswers: selectedAnswers,);
+    }
     return MaterialApp(
       home: Scaffold(
         body: Container(
