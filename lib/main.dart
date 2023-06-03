@@ -12,20 +12,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.centerRight,
-              end: Alignment.bottomLeft,
-              colors: [Colors.deepPurple, Colors.lightBlue],
-            ),
-          ),
-          child: const Quiz(),
-        ),
-      ),
-    );
+    return const Quiz();
   }
 }
